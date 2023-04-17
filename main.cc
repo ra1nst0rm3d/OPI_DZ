@@ -46,7 +46,16 @@ void PrintMatrix(int (&matrix) [SIDE][SIDE]) {
 
 // Возвращает максимальный элемент "правого треугольника" квадратной матрицы
 int MaxValue(int (&matrix) [SIDE][SIDE]) {
+        int tmp = LOW_THRESHOLD - 1; // -16 потому что у нас диапазон заполнения [-15, 30]
 
+        for(int j = SIDE-1; j > (SIDE-1)/2; j--) {
+                for(int i = SIDE-j; i < SIDE-1; i++) {
+                        if(i > j) break;
+                        if(matrix[i][j] > tmp) tmp = matrix[i][j];
+                }
+        }
+	
+        return (tmp == LOW_THRESHOLD - 1) ? 0 : tmp;
 }
 
 // Возвращает произведение элементов, следующих за максимальными в каждом столбце
