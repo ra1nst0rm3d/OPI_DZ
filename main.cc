@@ -60,7 +60,30 @@ int MaxValue(int (&matrix) [SIDE][SIDE]) {
 
 // Возвращает произведение элементов, следующих за максимальными в каждом столбце
 int Task3(int (&matrix)[SIDE][SIDE]) {//
+        int result = 1, currMax{}, maxI{}, maxJ{};
 
+	for (int j = 0; j < SIDE; j++) {
+		for (int i = 0; i < SIDE; i++) {
+			if (abs(matrix[i][j]) > currMax) {
+				currMax = matrix[i][j];
+				maxI = i;
+			}
+		}
+		if (maxI < SIDE && maxJ < SIDE) {
+			result *= matrix[maxI + 1][maxJ];
+			currMax = 0;
+			maxI = 0;
+			maxJ = 0;
+		}
+		else {
+			result *= currMax;
+			currMax = 0;
+			maxI = 0;
+			maxJ = 0;
+		}
+	}
+
+	return result;
 
 }
 
