@@ -57,8 +57,19 @@ void ReplaceNegative (int(&matrix)[SIDE][SIDE]) {
 
 // Сортировка строк матрицы по возрастанию
 void SortMatrixByAscending(int (&matrix) [SIDE][SIDE]){
+    int tmp{};
 
-
+	for (int i = 0; i < SIDE; i++) {
+		for (int j = 0; j < SIDE; j++) {
+			for (int k = 0; k < SIDE - 1; k++) {
+				if (Matrix[i][k] > Matrix[i][j]) {
+					tmp = Matrix[i][k];
+					Matrix[i][k] = Matrix[i][j];
+					Matrix[i][j] = tmp;
+				}
+			}
+		}
+	}
 }
 
 // Функция, отрабатывающая команды пользователя
