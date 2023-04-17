@@ -23,23 +23,67 @@ void PrintMenu() {
 // Устанавливает случайные значения элементов в пределах [-15; 30]
 void GenerateMatrix(int (&matrix) [SIDE][SIDE]) {
 
+        for(int i = 0; i < SIDE; i++) { 
+                for(int j = 0; j < SIDE; j++) {
+                        matrix[i][j] = (rand() % (HIGH_THRESHOLD + abs(LOW_THRESHOLD) + 1)) + LOW_THRESHOLD;
+                }
+        }
 
 }
 
 // Выводит матрицу на экран
 void PrintMatrix(int (&matrix) [SIDE][SIDE]) {
 
+        for(int i = 0; i < SIDE; i++) {
+                for(int j = 0; j < SIDE; j++) {
+                        cout << matrix[i][j] << "\t";
+                }
+                cout << "\n";
+        }
+
 }
 
 
 // Возвращает максимальный элемент "правого треугольника" квадратной матрицы
 int MaxValue(int (&matrix) [SIDE][SIDE]) {
+        int tmp = LOW_THRESHOLD - 1; // -16 потому что у нас диапазон заполнения [-15, 30]
 
+        for(int j = SIDE-1; j > (SIDE-1)/2; j--) {
+                for(int i = SIDE-j; i < SIDE-1; i++) {
+                        if(i > j) break;
+                        if(matrix[i][j] > tmp) tmp = matrix[i][j];
+                }
+        }
+	
+        return (tmp == LOW_THRESHOLD - 1) ? 0 : tmp;
 }
 
 // Возвращает произведение элементов, следующих за максимальными в каждом столбце
 int Task3(int (&matrix)[SIDE][SIDE]) {//
+        int result = 1, currMax{}, maxI{}, maxJ{};
 
+	for (int j = 0; j < SIDE; j++) {
+		for (int i = 0; i < SIDE; i++) {
+			if (abs(matrix[i][j]) > currMax) {
+				currMax = matrix[i][j];
+				maxI = i;
+			}
+		}
+		if (maxI < SIDE && maxJ < SIDE) {
+			result *= matrix[maxI + 1][maxJ];
+			currMax = 0;
+			maxI = 0;
+			maxJ = 0;
+		}
+		else {
+			result *= currMax;
+			currMax = 0;
+			maxI = 0;
+			maxJ = 0;
+		}
+	}
+
+	return result;
 
 }
 
