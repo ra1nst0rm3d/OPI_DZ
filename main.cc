@@ -23,6 +23,11 @@ void PrintMenu() {
 // Устанавливает случайные значения элементов в пределах [-15; 30]
 void GenerateMatrix(int (&matrix) [SIDE][SIDE]) {
 
+        for(int i = 0; i < SIDE; i++) { 
+                for(int j = 0; j < SIDE; j++) {
+                        matrix[i][j] = (rand() % (HIGH_THRESHOLD + abs(LOW_THRESHOLD) + 1)) + LOW_THRESHOLD;
+                }
+        }
 
 }
 
