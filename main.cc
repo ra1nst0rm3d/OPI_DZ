@@ -34,6 +34,13 @@ void GenerateMatrix(int (&matrix) [SIDE][SIDE]) {
 // Выводит матрицу на экран
 void PrintMatrix(int (&matrix) [SIDE][SIDE]) {
 
+        for(int i = 0; i < SIDE; i++) {
+                for(int j = 0; j < SIDE; j++) {
+                        cout << matrix[i][j] << "\t";
+                }
+                cout << "\n";
+        }
+
 }
 
 
